@@ -10,7 +10,7 @@
 
 @interface PublicTableViewController ()
 
-@property(nonatomic,copy) PublicWeiboViewModel *publicViewModel;
+@property(nonatomic,strong) PublicWeiboViewModel *publicViewModel;
 
 @end
 
