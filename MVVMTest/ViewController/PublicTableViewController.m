@@ -10,7 +10,7 @@
 
 @interface PublicTableViewController ()
 
-@property(nonatomic,strong) PublicWeiboViewModel *publicViewModel;
+@property(nonatomic,copy) PublicWeiboViewModel *publicViewModel;
 
 @end
 
@@ -30,12 +30,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    __weak typeof(self) weakSelf = self;
     [self.publicViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         [SVProgressHUD dismiss];
-         self.publicViewModel.publicModelArray = returnValue;
-        [self.tableView reloadData];
-        DDLog(@"%@",self.publicViewModel.publicModelArray);
+         weakSelf.publicViewModel.publicModelArray = returnValue;
+        [weakSelf.tableView reloadData];
+        DDLog(@"%@",weakSelf.publicViewModel.publicModelArray);
         
     } WithErrorBlock:^(id errorCode) {
         
