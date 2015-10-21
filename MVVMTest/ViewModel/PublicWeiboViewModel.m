@@ -1,12 +1,12 @@
 //
 //  PublicWeiboViewModel.m
 //  MVVMTest
-//
+//  发现一个问题
 
 
 #import "PublicWeiboViewModel.h"
 #import "PublicDetailViewController.h"
-
+#import "PublicCell.h"
 @implementation PublicWeiboViewModel
 
 //获取公共微博
@@ -85,14 +85,33 @@
 
 
 #pragma 跳转到详情页面，如需网路请求的，可在此方法中添加相应的网络请求
--(void) weiboDetailWithPublicModel: (PublicModel *) publicModel WithViewController:(UIViewController *)superController
+-(void) weiboDetailWithPublicModelIndex: (NSIndexPath *) indexPath WithViewController: (UIViewController *)superController;
 {
+    PublicModel *publicModel = self.publicModelArray[indexPath.row];
     DDLog(@"%@,%@,%@",publicModel.userId,publicModel.weiboId,publicModel.text);
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     PublicDetailViewController *detailController = [storyboard instantiateViewControllerWithIdentifier:@"PublicDetailViewController"];
-    detailController.publicModel = publicModel;
+    detailController.model = publicModel;
+    detailController.publicModel = self;
     [superController.navigationController pushViewController:detailController animated:YES];
     
+}
+
+-(void) setValueWithindexPath:(NSIndexPath *)indexPath withCell:(PublicCell *)cell;
+{
+    PublicModel *publicModel = self.publicModelArray[indexPath.row];
+    cell.userName.text = publicModel.userName;
+    cell.date.text = publicModel.date;
+    cell.weiboText.text = publicModel.text;
+    [cell.headImageView setImageWithURL:publicModel.imageUrl];
+
+}
+-(void) initpublicdeTailViewController:(PublicDetailViewController *)controller withModel:(PublicModel *)model;
+{
+    controller.userNameLabel.text = model.userName;
+    controller.timeLabel.text = model.date;
+    controller.textLable.text = model.text;
+    [controller.headImageView setImageWithURL:model.imageUrl];
 }
 
 

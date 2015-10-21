@@ -5,12 +5,10 @@
 
 
 #import "PublicDetailViewController.h"
-
+#import "PublicWeiboViewModel.h"
+#import "PublicModel.h"
 @interface PublicDetailViewController ()
-@property (strong, nonatomic) IBOutlet UIImageView *headImageView;
-@property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
-@property (strong, nonatomic) IBOutlet UITextView *textLable;
+
 
 @end
 
@@ -18,11 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _userNameLabel.text = _publicModel.userName;
-    _timeLabel.text = _publicModel.date;
-    _textLable.text = _publicModel.text;
-    [_headImageView setImageWithURL:_publicModel.imageUrl];
-    // Do any additional setup after loading the view.
+    [self.publicModel initpublicdeTailViewController:self withModel:self.model];
+   
 }
 
 - (void)didReceiveMemoryWarning {

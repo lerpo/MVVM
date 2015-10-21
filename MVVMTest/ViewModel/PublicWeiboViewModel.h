@@ -6,11 +6,19 @@
 
 #import "ViewModelClass.h"
 #import "PublicModel.h"
-
+@class PublicCell;
+@class PublicDetailViewController;
 @interface PublicWeiboViewModel : ViewModelClass
-//获取围脖列表
+
+@property (strong, nonatomic) NSArray *publicModelArray;
+//获取微博列表
 -(void) fetchPublicWeiBo;
 
 //跳转到微博详情页
--(void) weiboDetailWithPublicModel: (PublicModel *) publicModel WithViewController: (UIViewController *)superController;
+-(void) weiboDetailWithPublicModelIndex: (NSIndexPath *) indexPath WithViewController: (UIViewController *)superController;
+
+
+-(void) setValueWithindexPath:(NSIndexPath *)indexPath withCell:(PublicCell *)cell;
+
+-(void) initpublicdeTailViewController:(PublicDetailViewController *)controller withModel:(PublicModel *)model;
 @end

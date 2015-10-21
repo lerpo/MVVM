@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>76F13E6F-DCEB-4BDE-BE28-F1B06C50F16F</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>MVVMTest</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>274A66C13315C41966315FFD8310049FE5AD6F1B</key>
 		<string>https://github.com/lerpo/MVVM.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>MVVMTest.xcodeproj/project.xcworkspace</string>
+	<string>MVVMTest.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>274A66C13315C41966315FFD8310049FE5AD6F1B</key>

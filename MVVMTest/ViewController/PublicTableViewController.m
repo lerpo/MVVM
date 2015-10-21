@@ -10,22 +10,32 @@
 
 @interface PublicTableViewController ()
 
-@property (strong, nonatomic) NSArray *publicModelArray;
+@property(nonatomic,strong) PublicWeiboViewModel *publicViewModel;
 
 @end
 
+
 @implementation PublicTableViewController
+
+-(PublicWeiboViewModel *)publicViewModel
+{
+    if(_publicViewModel == nil)
+    {
+        _publicViewModel = [PublicWeiboViewModel new];
+    }
+    return _publicViewModel;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    PublicWeiboViewModel *publicViewModel = [[PublicWeiboViewModel alloc] init];
-    [publicViewModel setBlockWithReturnBlock:^(id returnValue) {
+    [self.publicViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         [SVProgressHUD dismiss];
-        _publicModelArray = returnValue;
+         self.publicViewModel.publicModelArray = returnValue;
         [self.tableView reloadData];
-        DDLog(@"%@",_publicModelArray);
+        DDLog(@"%@",self.publicViewModel.publicModelArray);
         
     } WithErrorBlock:^(id errorCode) {
         
@@ -37,7 +47,7 @@
         
     }];
     
-    [publicViewModel fetchPublicWeiBo];
+    [self.publicViewModel fetchPublicWeiBo];
     
     [SVProgressHUD showWithStatus:@"正在获取用户信息……" maskType:SVProgressHUDMaskTypeBlack];
     
@@ -56,22 +66,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return _publicModelArray.count;
+    return self.publicViewModel.publicModelArray.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PublicCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PublicCell" forIndexPath:indexPath];
     
-    [cell setValueWithDic:_publicModelArray[indexPath.row]];
-    
+    [self.publicViewModel setValueWithindexPath:indexPath withCell:cell];
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PublicWeiboViewModel *publicViewModel = [[PublicWeiboViewModel alloc] init];
-    [publicViewModel weiboDetailWithPublicModel:_publicModelArray[indexPath.row] WithViewController:self];
+    
+    [self.publicViewModel weiboDetailWithPublicModelIndex:indexPath WithViewController:self];
 }
 
 /*
